@@ -1,23 +1,22 @@
 ## 時刻表案内コマンド
-　まだやってないよ→![test](https://github.com/pinoshima/robosys2025/actions/workflows/test.yml/badge.svg)
 
 ## 概要
 `StationSelector` と `LocationPublisher` の2つのノードを提供するROS 2パッケージである．
+
 現在地の緯度経度から最寄り駅を計算し，時刻表に基づく次の発車時刻を表示する．
 
-## インストール方法
-```bash
-# ワークスペース作成
-mkdir -p ~/ros2_ws/src
-cd ~/ros2_ws/src
+## ノード、トピックの機能の説明
+このパッケージでは，列車時刻表案内の機能をノードとトピックで分離して実装している．
 
-# リポジトリをクローン
-git clone https://github.com/ユーザ名/timetable_guide.git
+- `location_publisher` ノード:
+  - 現在地（緯度・経度）を `/current_location` トピックにパブリッシュ
 
-# ビルド
-cd ~/ros2_ws
-colcon build --symlink-install
-source install/setup.bash
+- `station_selector` ノード:
+  - `/current_location` を購読
+  - 最寄駅と次の発車時刻を計算
+  - 計算結果を `/next_train` トピックにパブリッシュ
+
+トピックを介してノード間でデータをやり取りする．
 
 ## 必用なソフトウェア
 - Python
