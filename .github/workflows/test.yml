@@ -13,27 +13,36 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
+      with:
+        path: timetable_guide
 
     - name: Setup ROS 2 Jazzy
       uses: ros-tooling/setup-ros@v0.7
       with:
         required-ros-distributions: jazzy
 
+    - name: Create ROS 2 workspace
+      run: |
+        mkdir -p ros2_ws/src
+        mv timetable_guide ros2_ws/src/
+
     - name: Install dependencies
       run: |
         source /opt/ros/jazzy/setup.bash
         sudo rosdep init || true
         rosdep update
-        rosdep install --from-paths src --ignore-src -r -y
+        rosdep install --from-paths ros2_ws/src --ignore-src -r -y
 
     - name: Build workspace
       run: |
         source /opt/ros/jazzy/setup.bash
+        cd ros2_ws
         colcon build --event-handlers console_direct+
 
     - name: Run tests
       run: |
         source /opt/ros/jazzy/setup.bash
+        cd ros2_ws
         colcon test --event-handlers console_direct+
         colcon test-result --verbose
 
