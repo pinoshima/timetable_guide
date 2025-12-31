@@ -1,0 +1,46 @@
+#!/usr/bin/python3
+import rclpy
+from rclpy.node import Node
+from geometry_msgs.msg import Point
+
+
+class LocationPublisher(Node):
+
+    def __init__(self):
+        super().__init__('location_publisher')
+
+        self.publisher_ = self.create_publisher(
+            Point,
+            'current_location',
+            10
+        )
+
+        # 1秒ごとに publish
+        self.timer = self.create_timer(1.0, self.publish_location)
+
+        # 仮の「学校の緯度・経度」
+        self.latitude = 35.66177
+        self.longitude = 140.0151
+
+        self.get_logger().info('Location Publisher started')
+
+    def publish_location(self):
+        msg = Point()
+        msg.x = self.latitude
+        msg.y = self.longitude
+        msg.z = 0.0
+
+        self.publisher_.publish(msg)
+
+        self.get_logger().info(
+            f'Publish location: lat={msg.x}, lon={msg.y}'
+        )
+
+
+def main():
+    rclpy.init()
+    node = LocationPublisher()
+    rclpy.spin(node)
+    node.destroy_node()
+    rclpy.shutdown()
+
