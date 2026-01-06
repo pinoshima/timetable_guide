@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+# SPDX-FileCopyrightText: 2025 Kaito Shima
+# SPDX-License-Identifier: BSD-3-Clause
 
 from launch import LaunchDescription
 from launch_ros.actions import Node
