@@ -1,0 +1,13 @@
+name: test
+on: push
+jobs:
+  test:
+    runs-on: Ubuntu 24.04.3 LTS
+    container: ryuichiueda/ubuntu22.04-ros2:latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: build and test
+        run: |
+          rsync -av ./ /root/ros2_ws/src/timetable_guide/
+          cd /root/ros2_ws
+          bash -xv ./src/timetable_guide/test/test.bash /root

@@ -1,0 +1,20 @@
+#!/bin/bash 
+
+dir=~
+[ "$1" != "" ] && dir="$1"
+
+cd $dir/ros2_ws || exit 1
+colcon build || exit 1
+source $dir/.bashrc
+
+timeout 10 ros2 launch timetable_guide timetable.launch.py > /tmp/timetable_guide.log 2>&1
+
+cat /tmp/timetable_guide.log |
+grep "Location Publisher started" || exit 1
+
+cat /tmp/timetable_guide.log |
+grep "Station Selector started" || exit 1
+
+cat /tmp/timetable_guide.log |
+grep "Nearest station" || exit 1
+
