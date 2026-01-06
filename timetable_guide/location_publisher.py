@@ -15,10 +15,8 @@ class LocationPublisher(Node):
             10
         )
 
-        # 1秒ごとに publish
         self.timer = self.create_timer(1.0, self.publish_location)
 
-        # 仮の「学校の緯度・経度」
         self.latitude = 35.66177
         self.longitude = 140.0151
 
@@ -43,4 +41,3 @@ def main():
     rclpy.spin(node)
     node.destroy_node()
     rclpy.shutdown()
-

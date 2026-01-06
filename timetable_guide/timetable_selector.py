@@ -13,13 +13,11 @@ class TimetableSelector(Node):
     def __init__(self):
         super().__init__('timetable_selector')
 
-        # === ROS2正式流儀でconfigのパスを取得 ===
         package_share = get_package_share_directory('timetable_guide')
         config_path = os.path.join(package_share, 'config', 'timetable.yaml')
 
         self.get_logger().info(f'Loading timetable from: {config_path}')
 
-        # === YAML読み込み ===
         try:
             with open(config_path, 'r') as f:
                 self.timetable = yaml.safe_load(f)
@@ -28,10 +26,6 @@ class TimetableSelector(Node):
             raise
 
         self.get_logger().info('Timetable loaded successfully')
-
-        # （ここから先は後で機能追加）
-        # 今は「起動してYAML読める」だけでOK
-
 
 def main():
     rclpy.init()

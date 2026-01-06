@@ -11,7 +11,6 @@ class StationSelector(Node):
     def __init__(self):
         super().__init__('station_selector')
 
-        # YAML 読み込み
         pkg_share = os.path.join(os.getenv('AMENT_PREFIX_PATH').split(':')[0], 'share', 'timetable_guide')
         yaml_path = os.path.join(pkg_share, 'config', 'timetable.yaml')
         with open(yaml_path, 'r') as f:
@@ -21,18 +20,14 @@ class StationSelector(Node):
         self.get_logger().info(f'Stations loaded')
         self.get_logger().info('Station Selector started (auto mode)')
 
-        # Publisher: 次の列車情報
         self.pub = self.create_publisher(String, 'next_train', 10)
 
-        # タイマー: 1秒ごとに現在時刻で最寄駅＆次発車時刻を出す
         self.timer = self.create_timer(1.0, self.timer_callback)
 
     def timer_callback(self):
-        # 現在時刻取得
         now = datetime.now()
         current_time = now.strftime("%H:%M")
 
-        # 現在位置取得（ここでは固定座標）
         current_lat = 35.66177
         current_lon = 140.0151
 
@@ -62,11 +57,10 @@ class StationSelector(Node):
         for t in times:
             if t >= current_time:
                 return t
-        return times[0]  # 翌日の最初の電車
+        return times[0]
 
     @staticmethod
     def haversine(lat1, lon1, lat2, lon2):
-        # 距離計算
         R = 6371.0
         dlat = radians(lat2 - lat1)
         dlon = radians(lon2 - lon1)
@@ -83,4 +77,3 @@ def main(args=None):
 
 if __name__ == '__main__':
     main()
-
