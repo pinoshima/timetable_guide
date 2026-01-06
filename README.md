@@ -1,4 +1,5 @@
 ## 時刻表案内コマンド
+![test](https://github.com/pinoshima/timetable_guide/actions/workflows/test.yml/badge.svg)
 
 ## 概要
 `StationSelector`と`LocationPublisher`と`timetable_selector.py`のノードを提供するパッケージである．
