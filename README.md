@@ -1,13 +1,11 @@
 ## 時刻表案内コマンド
 
 ## 概要
-`StationSelector` と `LocationPublisher` の2つのノードを提供するROS 2パッケージである．
+`StationSelector` と `LocationPublisher` の2つのノードを提供するパッケージである．
 
 現在地の緯度経度から最寄り駅を計算し，時刻表に基づく次の発車時刻を表示する．
 
 ## ノード、トピックの機能の説明
-このパッケージでは，列車時刻表案内の機能をノードとトピックで分離して実装している．
-
 - `location_publisher` ノード:
   - 現在地（緯度・経度）を `/current_location` トピックにパブリッシュ
 
