@@ -2,7 +2,7 @@
 ![test](https://github.com/pinoshima/timetable_guide/actions/workflows/test.yml/badge.svg)
 
 ## 概要
-本パッケージは`location_publisher`，`station_selector`，`timetable_selector`の各ノードを提供する．
+`StationSelector`と`LocationPublisher`と`timetable_selector.py`のノードを提供するパッケージである．
 
 あらかじめ設定された現在地の緯度経度から最寄り駅を計算し，時刻表に基づく次の発車時刻を表示する．
 
@@ -15,16 +15,17 @@
   - 最寄駅と次の発車時刻を計算
   - 計算結果を `/next_train` トピックにパブリッシュ
 
-- `timetable_selector` ノード:
+- `timetable_selector.py` ノード:
   - `/next_train` トピックをサブスクライブ
   - 駅名と発車時刻を受信し，表示
 
 ## 実行例
-launchファイルを起動する．
+下記の方法でlaunchファイルを起動．
 `ros2 launch timetable_guide timetable.launch.py`
 
-最寄り駅名，現在地から駅までの距離，現在の時刻から最寄り駅を出発する一番早い列車の時間を表示する．
-`Nearest station: Shinomiya (1.17739 km), Next train: 17:05`
+下記の内容が出力される．
+内容は最寄り駅，駅名，現在地から駅までの距離，現在時間から最寄り駅を発車する１番早い列車の時間を表示する
+Nearest station: Shinomiya (1.17739 km), Next train: 17:05
 
 ## 使用上の注意点
 今回の列車の発車時刻，位置は全て架空のため，使用する際には実際の情報に書き換える必要がある．
