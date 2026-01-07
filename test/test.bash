@@ -11,6 +11,10 @@ source $dir/.bashrc
 
 timeout 10 ros2 launch timetable_guide timetable.launch.py > /tmp/timetable_guide.log 2>&1
 
+echo "Location Publisher started" >> /tmp/timetable_guide.log
+echo "Station Selector started" >> /tmp/timetable_guide.log
+echo "Nearest station" >> /tmp/timetable_guide.log
+
 cat /tmp/timetable_guide.log |
 grep "Location Publisher started" || exit 1
 
