@@ -21,6 +21,7 @@
 
 ## 実行例
 launchファイルを起動する．
+
 `ros2 launch timetable_guide timetable.launch.py`
 
 最寄り駅名，現在地から駅までの距離，現在の時刻から最寄り駅を出発する一番早い列車の時間を表示する．
