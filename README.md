@@ -8,17 +8,14 @@
 
 ## ノード、トピックの機能の説明
 - `location_publisher` ノード:
-  - ノードの型：Publisher ノード
-  - 現在地（緯度・経度）を `/current_location` トピックにパブリッシュ
+  - 現在地（緯度・経度）を `/current_location`(型：geometry_msgs/msg/Point)トピックにパブリッシュ
 
 - `station_selector` ノード:
-  - ノードの型：Subscriber / Publisher ノード
   - `/current_location` を読み込む
   - 最寄駅と次の発車時刻を計算
-  - 計算結果を `/next_train` トピックにパブリッシュ
+  - 計算結果を `/next_train`(型：std_msgs/msg/String)トピックにパブリッシュ
 
 - `timetable_selector` ノード:
-  - ノードの型：Subscriber ノード
   - `/next_train` トピックをサブスクライブ
   - 駅名と発車時刻を受信し，表示
 
